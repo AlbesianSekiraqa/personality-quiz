@@ -1,11 +1,18 @@
+export function getPrevQuestion(data, id) {
+  return data.questions[id - 2];
+}
+
+export function getNextQuestion(data, id) {
+  return data.questions[id];
+}
+
 export function getQuestion(data) {
   const registredAnswers = getRegistredData();
 
-  // potencial function on answer
-  // if (registredAnswers?.length > 0) {
-  //   const question = data.questions[registredAnswers.length];
-  //   return question;
-  // }
+  if (registredAnswers?.length > 0) {
+    const question = data.questions[registredAnswers.length];
+    return question;
+  }
 
   return data.questions[0];
 }

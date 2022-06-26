@@ -5,7 +5,9 @@ import {
   getNumberOfQuestions,
   getQuestion,
   getRegistredData,
-  registerCurrentItems
+  registerCurrentItems,
+  getNextQuestion,
+  getPrevQuestion
 } from "./functions";
 
 const Quiz = ({ data }) => {
@@ -25,19 +27,19 @@ const Quiz = ({ data }) => {
     registerSelctedAnswer(currentQuestionId);
     setSelectedAnswer(false);
 
-    //potencial function
-    // setCurrnetQuestion(getNextQuestion(data, currentQuestionId));
+    setCurrnetQuestion(getNextQuestion(data, currentQuestionId));
   }
 
   function setPrevQuestion() {
+    const currentQuestionId = currentQuestion.id;
     items.pop();
     registerCurrentItems(items);
     setItems(items);
     setSelectedAnswer(false);
-
-    //potencial function
-    // setCurrnetQuestion(getPrevQuestion(data, currentQuestionId));
+    setCurrnetQuestion(getPrevQuestion(data, currentQuestionId));
   }
+
+  const currentAnswer = (selectedOption) => setSelectedAnswer(selectedOption);
 
   return (
     <QuizContainer>
@@ -48,6 +50,8 @@ const Quiz = ({ data }) => {
       ) : (
         <Question
           question={currentQuestion}
+          currentAnswer={currentAnswer}
+          selectedAnswer={selectedAnswer}
           totalQuestions={totalQuestionsNr}
           setPrevQuestion={setPrevQuestion}
           setNextQuestion={setNextQuestion}
