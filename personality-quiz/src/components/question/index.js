@@ -6,7 +6,7 @@ import {
   QuizRequirment,
   QuizBtn,
 } from "../../assets/layouts/layouts";
-import Answer from "../answers";
+import Answer from "../answer";
 
 const Question = ({
   question,
@@ -15,6 +15,7 @@ const Question = ({
   selectedAnswer,
   setPrevQuestion,
   setNextQuestion,
+  setFinalResult,
 }) => {
   if (!question) {
     return;
@@ -56,7 +57,13 @@ const Question = ({
             disabled={!(selectedAnswer || selectedAnswer === 0)}
           >{`Next question >`}</QuizBtn>
         ) : (
-         <p>Final result button</p>
+          <QuizBtn
+            className="finish-test"
+            disabled={!(selectedAnswer || selectedAnswer === 0)}
+            onClick={setFinalResult}
+          >
+            {`Finish test >`}
+          </QuizBtn>
         )}
       </Flex>
     </>
